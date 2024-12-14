@@ -1,0 +1,24 @@
+package com.cargocompare.CargoCompare_api.commons.entities;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "condiciones_tarifa")
+public class TariffConditions {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String type;
+    private double factor;
+
+    @ManyToOne
+    @JoinColumn(name = "tarifa_id", nullable = false)
+    private GeneralTariffs generalTariffs;
+}
