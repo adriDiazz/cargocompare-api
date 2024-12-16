@@ -1,5 +1,6 @@
 package com.cargocompare.CargoCompare_api.commons.entities;
 
+import com.cargocompare.CargoCompare_api.user.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,9 +31,16 @@ public class User implements UserDetails {
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
+
     private boolean isVerified;
+    private String verificationCode;
+
+    private boolean mfaEnabled;
+    private String secret;
+
     @Enumerated(EnumType.STRING)
-    Rol.Roles role;
+    Role role;
+
 
     @ManyToOne
     @JoinColumn(name = "empresas_logistica_id", nullable = true)

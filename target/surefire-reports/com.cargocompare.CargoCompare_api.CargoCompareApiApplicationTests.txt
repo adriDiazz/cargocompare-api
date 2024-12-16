@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.cargocompare.CargoCompare_api.CargoCompareApiApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.420 s -- in com.cargocompare.CargoCompare_api.CargoCompareApiApplicationTests

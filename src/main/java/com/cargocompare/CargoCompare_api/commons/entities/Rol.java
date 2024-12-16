@@ -1,10 +1,10 @@
 package com.cargocompare.CargoCompare_api.commons.entities;
 
-public class Rol {
 
-    public enum Roles {
+
+    public enum Rol {
         USER,
         ADMIN_EMPRESA,
         SUPERADMIN
     }
-}
+
