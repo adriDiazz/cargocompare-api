@@ -15,4 +15,5 @@ public class AuthenticationResponse {
     private String refreshToken;
     private boolean mfaEnabled;
     private String secretImageUri;
+    private String verificationCode;
 }

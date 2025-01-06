@@ -2,18 +2,40 @@ server:
   port: 8080
 
 spring:
+  cloud:
+    azure:
+      keyvault:
+        secret:
+          property-sources[0]:
+            endpoint: https://cargocompare.vault.azure.net/
+
   jpa:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3306/CargoCompareDB
-    username: root
-    password: Toshiba2022!!77
+    url: ${mysql-url-dev}
+    username: ${mysql-username-dev}
+    password: ${mysql-password-dev}
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${mail-username-dev}
+    password: ${mail-appPassword-dev}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 
 application:
   security:
     jwt:
-      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      secret-key: ${jwt-secret-dev}
       expiration: 86400000 # a day
       refresh-token:
         expiration: 604800000 # 7 days
+
+
+

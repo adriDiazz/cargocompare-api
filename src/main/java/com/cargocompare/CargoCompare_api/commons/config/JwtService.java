@@ -1,6 +1,7 @@
 package com.cargocompare.CargoCompare_api.commons.config;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -11,6 +12,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import io.jsonwebtoken.security.SignatureException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -27,6 +31,25 @@ public class JwtService {
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
+    }
+
+    public String getTokenFromCookies(HttpServletRequest request) {
+        // Obtener todas las cookies de la solicitud
+        Cookie[] cookies = request.getCookies();
+
+        // Verificar si existen cookies
+        if (cookies == null) {
+            return null; // No hay cookies presentes
+        }
+
+        // Buscar la cookie llamada "token"
+        for (Cookie cookie : cookies) {
+            if ("token".equals(cookie.getName())) {
+                return cookie.getValue(); // Retornar el valor del token
+            }
+        }
+
+        return null; // Si no se encuentra la cookie "token"
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -69,6 +92,23 @@ public class JwtService {
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+    }
+
+    public boolean isTokenValidSign(String token) {
+        try {
+            // Parsear el token y verificar la firma
+            Jwts.parser()
+                    .setSigningKey(secretKey)
+                    .parseClaimsJws(token);
+            return true;
+        } catch (SignatureException e) {
+            System.out.println("Firma inválida: " + e.getMessage());
+        } catch (ExpiredJwtException e) {
+            System.out.println("El token ha expirado: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Token inválido: " + e.getMessage());
+        }
+        return false;
     }
 
     private boolean isTokenExpired(String token) {

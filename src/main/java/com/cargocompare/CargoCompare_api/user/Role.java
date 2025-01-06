@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import static com.cargocompare.CargoCompare_api.user.Permission.*;
 
+@Getter
 public enum Role {
 
     USER(Collections.emptySet()),
@@ -43,10 +44,6 @@ public enum Role {
 
     Role(Set<Permission> permissions) {
         this.permissions = permissions;
-    }
-
-    public Set<Permission> getPermissions() {
-        return permissions;
     }
 
     public List<SimpleGrantedAuthority> getAuthorities() {

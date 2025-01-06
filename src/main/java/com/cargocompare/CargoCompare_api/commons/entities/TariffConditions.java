@@ -1,5 +1,6 @@
 package com.cargocompare.CargoCompare_api.commons.entities;
 
+import com.cargocompare.CargoCompare_api.tariffs.GeneralTariffs;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
