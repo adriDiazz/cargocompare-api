@@ -21,8 +21,8 @@ public class UserDTO {
 
     private boolean isVerified;
     Collection<SimpleGrantedAuthority> authorities;
-    private LogisticCompany logisticCompany;
-    private Supplier supplier;
+//    private LogisticCompany logisticCompany;
+//    private Supplier supplier;
 
 
     public UserDTO(UUID id, String name, String email, Collection<? extends GrantedAuthority> authorities) {

@@ -1,6 +1,6 @@
 package com.cargocompare.CargoCompare_api.commons.entities;
 
-import com.cargocompare.CargoCompare_api.tariffs.GeneralTariffs;
+import com.cargocompare.CargoCompare_api.tariffs.GeneralTariff;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +21,5 @@ public class TariffConditions {
 
     @ManyToOne
     @JoinColumn(name = "tarifa_id", nullable = false)
-    private GeneralTariffs generalTariffs;
+    private GeneralTariff generalTariffs;
 }

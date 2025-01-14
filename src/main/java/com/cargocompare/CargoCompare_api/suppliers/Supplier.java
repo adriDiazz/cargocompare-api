@@ -1,7 +1,7 @@
 package com.cargocompare.CargoCompare_api.suppliers;
 
+import com.cargocompare.CargoCompare_api.commons.entities.SupplierCompany;
 import com.cargocompare.CargoCompare_api.tariffs.GeneralTariff;
-import com.cargocompare.CargoCompare_api.commons.entities.LogisticCompanySupplier;
 import com.cargocompare.CargoCompare_api.commons.entities.SupplierZones;
 import com.cargocompare.CargoCompare_api.user.User;
 import jakarta.persistence.*;
@@ -43,7 +43,7 @@ public class Supplier {
     private List<GeneralTariff> generalTariffs = new ArrayList<>();
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<LogisticCompanySupplier> companySuppliers = new ArrayList<>();
+    private List<SupplierCompany> companySuppliers = new ArrayList<>();
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SupplierZones> supplierZones = new ArrayList<>();

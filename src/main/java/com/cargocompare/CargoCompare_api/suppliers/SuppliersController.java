@@ -26,14 +26,13 @@ public class SuppliersController {
         return ResponseEntity.ok(supplierService.createSupplier(supplierRequest));
     }
 
-    @PostMapping("/company/{companyId}/tariff/{tariffId}")
+    @PostMapping("/company/{companyId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Supplier> createSupplierForCompany(
             @RequestBody  @Valid CreateSupplierRequest supplierRequest,
-            @PathVariable Long companyId,
-            @PathVariable Long tariffId
+            @PathVariable Long companyId
     ) {
-        return ResponseEntity.ok(supplierService.createSupplier(supplierRequest));
+        return ResponseEntity.ok(supplierService.createSupplierForCompany(supplierRequest, companyId));
     }
 
 }

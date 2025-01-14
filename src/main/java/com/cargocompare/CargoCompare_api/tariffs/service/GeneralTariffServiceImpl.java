@@ -1,5 +1,6 @@
 package com.cargocompare.CargoCompare_api.tariffs.service;
 
+import com.cargocompare.CargoCompare_api.tariffs.GeneralTariff;
 import com.cargocompare.CargoCompare_api.tariffs.GeneralTariffRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,4 +14,8 @@ public class GeneralTariffServiceImpl implements GeneralTariffService {
     }
 
 
+    @Override
+    public GeneralTariff createTariff(GeneralTariff tariff) {
+        return null;
+    }
 }

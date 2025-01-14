@@ -5,12 +5,14 @@ import com.cargocompare.CargoCompare_api.suppliers.Supplier;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @Table(name = "empresas_logistica_proveedor")
 public class SupplierCompany {
 

@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @Getter
 public class CompanyDTO {
+    private Long id;
     private String name;
     private String address;
     private String phone;
@@ -24,4 +25,5 @@ public class CompanyDTO {
     private String city;
     private String province;
     private String country;
+
 }

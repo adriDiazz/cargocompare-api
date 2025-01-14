@@ -23,4 +23,26 @@ public class CompanyMapper {
                 .webSite(companyRequest.getWebSite())
                 .build();
     }
+
+    public static CompanyDTO toCompanyDTO(LogisticCompany logisticCompany) {
+        return CompanyDTO.builder()
+                .id(logisticCompany.getId())
+                .name(logisticCompany.getName())
+                .address(logisticCompany.getAddress())
+                .phone(logisticCompany.getPhone())
+                .email(logisticCompany.getEmail())
+                .cif(logisticCompany.getCif())
+                .city(logisticCompany.getCity())
+                .country(logisticCompany.getCountry())
+                .description(logisticCompany.getDescription())
+                .contactEmail(logisticCompany.getContactEmail())
+                .contactPerson(logisticCompany.getContactPerson())
+                .contactPhone(logisticCompany.getContactPhone())
+                .logo(logisticCompany.getLogo())
+                .postalCode(logisticCompany.getPostalCode())
+                .province(logisticCompany.getProvince())
+                .socialReason(logisticCompany.getSocialReason())
+                .webSite(logisticCompany.getWebSite())
+                .build();
+    }
 }

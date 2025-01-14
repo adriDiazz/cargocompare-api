@@ -42,7 +42,7 @@ public class CreateCompanyRequest {
     private String contactEmail;
 
     @Size(max = 100, message = "Website must not exceed 100 characters")
-    @Pattern(regexp = "^(https?:\\/\\/)?[\\w.-]+(\\.[a-z]{2,})+(:\\d+)?(\\/.*)?$", message = "Website must be a valid URL")
+//    @Pattern(regexp = "^(https?:\\/\\/)?[\\w.-]+(\\.[a-z]{2,})+(:\\d+)?(\\/.*)?$", message = "Website must be a valid URL")
     private String webSite;
 
     @Size(max = 200, message = "Logo URL must not exceed 200 characters")

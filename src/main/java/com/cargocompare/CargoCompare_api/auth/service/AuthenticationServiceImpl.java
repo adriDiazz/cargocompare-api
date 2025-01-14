@@ -73,8 +73,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .email(user.getEmail())
                 .isVerified(user.isVerified())
                 .authorities(user.getAuthorities())
-                .logisticCompany(user.getLogisticCompany())
-                .supplier(user.getSupplier())
                 .build();
 
         Map<String, Object> extraClaims = Map.of("user", userDTO);
@@ -98,8 +96,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .email(user.getEmail())
                 .isVerified(user.isVerified())
                 .authorities(user.getAuthorities())
-                .logisticCompany(user.getLogisticCompany())
-                .supplier(user.getSupplier())
                 .build();
 
         Map<String, Object> extraClaims = Map.of("user", userDTO);

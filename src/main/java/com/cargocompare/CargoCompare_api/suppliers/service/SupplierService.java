@@ -5,5 +5,5 @@ import com.cargocompare.CargoCompare_api.suppliers.dto.CreateSupplierRequest;
 
 public interface SupplierService {
     Supplier createSupplier(CreateSupplierRequest supplierRequest);
-    Supplier createSupplierForCompany(CreateSupplierRequest supplierRequest, Long companyId, Long tariffId);
+    Supplier createSupplierForCompany(CreateSupplierRequest supplierRequest, Long companyId);
 }

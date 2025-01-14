@@ -9,6 +9,7 @@ import com.cargocompare.CargoCompare_api.suppliers.SuppliersRepository;
 import com.cargocompare.CargoCompare_api.suppliers.dto.CreateSupplierRequest;
 import com.cargocompare.CargoCompare_api.suppliers.dto.SupplierMapper;
 import com.cargocompare.CargoCompare_api.suppliers.exceptions.CreatingSupplierError;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -36,7 +37,8 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public Supplier createSupplierForCompany(CreateSupplierRequest supplierRequest, Long companyId, Long tariffId) {
+    @Transactional(rollbackOn = CreatingSupplierError.class)
+    public Supplier createSupplierForCompany(CreateSupplierRequest supplierRequest, Long companyId) {
 
         Supplier supplier = SupplierMapper.toSupplier(supplierRequest);
 
@@ -48,7 +50,6 @@ public class SupplierServiceImpl implements SupplierService {
         SupplierCompany relation = SupplierCompany.builder()
                 .logisticCompany(logisticCompany)
                 .supplier(supplier)
-                .tariffId(tariffId)
                 .build();
 
         supplierCompanyRepository.save(relation);
