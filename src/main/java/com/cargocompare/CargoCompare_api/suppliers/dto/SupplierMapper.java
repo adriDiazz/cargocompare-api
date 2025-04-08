@@ -45,6 +45,29 @@ public class SupplierMapper {
                 .province(supplier.getProvince())
                 .socialReason(supplier.getSocialReason())
                 .webSite(supplier.getWebSite())
+                .generalTariffs(supplier.getGeneralTariffs().stream().map(TariffMapper::toDTO).toList())
+                .build();
+    }
+
+    public static Supplier toSupplier(SupplierDTO supplierDTO) {
+        return Supplier.builder()
+                .id(supplierDTO.getId())
+                .name(supplierDTO.getName())
+                .address(supplierDTO.getAddress())
+                .phone(supplierDTO.getPhone())
+                .email(supplierDTO.getEmail())
+                .cif(supplierDTO.getCif())
+                .city(supplierDTO.getCity())
+                .country(supplierDTO.getCountry())
+                .description(supplierDTO.getDescription())
+                .contactEmail(supplierDTO.getContactEmail())
+                .contactPerson(supplierDTO.getContactPerson())
+                .contactPhone(supplierDTO.getContactPhone())
+                .logo(supplierDTO.getLogo())
+                .postalCode(supplierDTO.getPostalCode())
+                .province(supplierDTO.getProvince())
+                .socialReason(supplierDTO.getSocialReason())
+                .webSite(supplierDTO.getWebSite())
                 .build();
     }
 }

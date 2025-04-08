@@ -14,8 +14,10 @@ import com.cargocompare.CargoCompare_api.user.dto.UserDTO;
 import com.cargocompare.CargoCompare_api.user.dto.UserMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CompaniesServiceImpl implements CompaniesService{
@@ -48,7 +50,11 @@ public class CompaniesServiceImpl implements CompaniesService{
                 .orElseThrow(() -> new CompanyNotFoundError("La compañía con ID " + id + " no fue encontrada"));
 
         List<SupplierCompanyDTO> supplierCompanyDTO = company.getCompanySuppliers().stream()
-                .map(SupplierCompanyMapper::toDTO).toList();
+                .map(SupplierCompanyMapper::toDTO)
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toMap(dto -> dto.getSupplier().getId(), dto -> dto, (dto1, dto2) -> dto1),
+                        map -> new ArrayList<>(map.values())
+                ));
 
         List<UserDTO> employees = company.getEmployees().stream()
                 .map(UserMapper::toDTO).toList();

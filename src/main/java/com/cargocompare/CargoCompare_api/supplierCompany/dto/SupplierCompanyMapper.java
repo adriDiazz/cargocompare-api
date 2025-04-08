@@ -11,10 +11,25 @@ public class SupplierCompanyMapper {
         supplierCompanyDTO.setLogisticCompany(supplierCompany.getLogisticCompany().getId());
 
 
-
         supplierCompanyDTO.setSupplier(SupplierMapper.toSupplierDTO(supplierCompany.getSupplier()));
         supplierCompanyDTO.setTariffId(supplierCompany.getTariffId());
         return supplierCompanyDTO;
+    }
+
+
+    public static SupplierCompany toEntity(SupplierCompanyDTO supplierCompanyDTO) {
+        SupplierCompany supplierCompany = new SupplierCompany();
+        supplierCompany.setId(supplierCompanyDTO.getId());
+        supplierCompany.setSupplier(SupplierMapper.toSupplier(supplierCompanyDTO.getSupplier()));
+        supplierCompany.setTariffId(supplierCompanyDTO.getTariffId());
+        return supplierCompany;
+    }
+
+    public static SupplierCompany toEntity(CreateSupplierCompanyResquest supplierCompanyDTO) {
+        SupplierCompany supplierCompany = new SupplierCompany();
+        supplierCompany.setId(supplierCompanyDTO.getId());
+        supplierCompany.setTariffId(supplierCompanyDTO.getTariffId());
+        return supplierCompany;
     }
 
 

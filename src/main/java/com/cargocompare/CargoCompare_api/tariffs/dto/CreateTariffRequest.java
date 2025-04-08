@@ -10,16 +10,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GeneralTariffDTO {
-
-    private Long id;
+public class CreateTariffRequest {
     private String parameter;
     private double price;
     private TariffType tariffType;  // Representa el tipo de tarifa como una cadena
-    private Long supplierId;    // Solo almacenamos el ID del proveedor para referencias simples
-
-    // Lista de condiciones de tarifa, representadas por sus DTOs
-
-    // Constructor u otro método para facilitar la conversión de la entidad a DTO
-
+    private Long supplierId;
+    private Long logisticCompanyId; // ID de la empresa logística asociada a la tarifa
 }

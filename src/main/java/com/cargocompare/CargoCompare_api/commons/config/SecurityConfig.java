@@ -1,6 +1,5 @@
 package com.cargocompare.CargoCompare_api.commons.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -60,6 +59,8 @@ public class SecurityConfig {
                         ).permitAll()
                         .requestMatchers("/api/v1/admin/**").hasAnyRole(ADMIN.name())
                         .requestMatchers("/api/v1/companies/**").hasAnyRole(ADMIN.name(), MANAGER.name())
+                        .requestMatchers("/api/v1/suppliers/**").hasAnyRole(ADMIN.name(), MANAGER.name())
+                        .requestMatchers("/api/v1/tariffs/**").hasAnyRole(ADMIN.name(), MANAGER.name())
                         .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
                         .requestMatchers(GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
                         .requestMatchers(POST, "/api/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())

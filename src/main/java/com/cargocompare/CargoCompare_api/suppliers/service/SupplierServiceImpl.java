@@ -7,11 +7,14 @@ import com.cargocompare.CargoCompare_api.suppliers.Supplier;
 import com.cargocompare.CargoCompare_api.supplierCompany.SupplierCompanyRepository;
 import com.cargocompare.CargoCompare_api.suppliers.SuppliersRepository;
 import com.cargocompare.CargoCompare_api.suppliers.dto.CreateSupplierRequest;
+import com.cargocompare.CargoCompare_api.suppliers.dto.SupplierDTO;
 import com.cargocompare.CargoCompare_api.suppliers.dto.SupplierMapper;
 import com.cargocompare.CargoCompare_api.suppliers.exceptions.CreatingSupplierError;
+import com.cargocompare.CargoCompare_api.suppliers.exceptions.SupplierNotFoundError;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -56,5 +59,29 @@ public class SupplierServiceImpl implements SupplierService {
 
         return supplier;
     }
+
+    @Override
+    public List<SupplierDTO> getSuppliers() {
+        return suppliersRepository.findAll().stream()
+                .map(SupplierMapper::toSupplierDTO)
+                .toList();
+    }
+
+    @Override
+    public SupplierDTO getSupplierById(Long id) {
+        return suppliersRepository.findById(id)
+                .map(SupplierMapper::toSupplierDTO)
+                .orElseThrow(() -> new SupplierNotFoundError("Proveedor no encontrado"));
+    }
+
+    @Override
+    public SupplierDTO getSupplierByCompanyIdAndSupplierId(Long companyId, Long supplierId) {
+        return suppliersRepository.findSupplierByCompanyId(companyId, supplierId)
+                .map(SupplierMapper::toSupplierDTO)
+                .orElseThrow(() -> new SupplierNotFoundError("Proveedor no encontrado"));
+    }
+
+
+
 
 }

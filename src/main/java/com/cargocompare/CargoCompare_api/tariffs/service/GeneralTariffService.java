@@ -1,8 +1,9 @@
 package com.cargocompare.CargoCompare_api.tariffs.service;
 
-import com.cargocompare.CargoCompare_api.tariffs.GeneralTariff;
+import com.cargocompare.CargoCompare_api.tariffs.dto.CreateTariffRequest;
+import com.cargocompare.CargoCompare_api.tariffs.dto.GeneralTariffDTO;
 
 public interface GeneralTariffService {
 
-    GeneralTariff createTariff(GeneralTariff tariff);
+    GeneralTariffDTO createTariff(CreateTariffRequest tariff);
 }

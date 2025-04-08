@@ -1,20 +1,17 @@
 package com.cargocompare.CargoCompare_api.supplierCompany.dto;
 
-import com.cargocompare.CargoCompare_api.suppliers.dto.SupplierDTO;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
-public class SupplierCompanyDTO {
-
+public class CreateSupplierCompanyResquest {
     private Long id;
     private Long logisticCompany;
-    private SupplierDTO supplier;
+    private Long supplier;
     private Long tariffId;
-
-
 }
-

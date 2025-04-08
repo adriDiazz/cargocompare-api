@@ -3,16 +3,14 @@ package com.cargocompare.CargoCompare_api.commons.entities;
 import com.cargocompare.CargoCompare_api.companies.LogisticCompany;
 import com.cargocompare.CargoCompare_api.suppliers.Supplier;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Table(name = "empresas_logistica_proveedor")
 public class SupplierCompany {
 

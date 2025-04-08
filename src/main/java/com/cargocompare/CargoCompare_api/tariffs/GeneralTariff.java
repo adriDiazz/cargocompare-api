@@ -3,16 +3,14 @@ package com.cargocompare.CargoCompare_api.tariffs;
 import com.cargocompare.CargoCompare_api.commons.entities.TariffConditions;
 import com.cargocompare.CargoCompare_api.suppliers.Supplier;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tarifas_generales")
@@ -21,7 +19,7 @@ public class GeneralTariff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer parameter;
+    private String parameter;
     private double price;
 
     @Enumerated(EnumType.STRING) // Guardará los valores como texto en la base de datos
