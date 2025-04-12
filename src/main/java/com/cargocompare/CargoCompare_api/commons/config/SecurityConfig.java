@@ -45,6 +45,7 @@ public class SecurityConfig {
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
+                                "/api/v1/health",
                                 "/api/v1/auth/**",
                                 "/v2/api-docs",
                                 "/v3/api-docs",
