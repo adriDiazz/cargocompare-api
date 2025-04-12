@@ -1,7 +1,9 @@
 package com.cargocompare.CargoCompare_api.user.dto;
 
 import com.cargocompare.CargoCompare_api.companies.LogisticCompany;
+import com.cargocompare.CargoCompare_api.companies.dto.CompanyDTO;
 import com.cargocompare.CargoCompare_api.suppliers.Supplier;
+import com.cargocompare.CargoCompare_api.suppliers.dto.SupplierDTO;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,14 +17,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
+    private UUID id;
     private String name;
     private String lastName;
     private String email;
 
     private boolean isVerified;
     Collection<SimpleGrantedAuthority> authorities;
-//    private LogisticCompany logisticCompany;
-//    private Supplier supplier;
+    private CompanyDTO logisticCompany;
+    private SupplierDTO supplier;
 
 
     public UserDTO(UUID id, String name, String email, Collection<? extends GrantedAuthority> authorities) {

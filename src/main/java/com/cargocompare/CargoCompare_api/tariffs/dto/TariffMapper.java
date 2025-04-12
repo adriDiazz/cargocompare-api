@@ -19,6 +19,9 @@ public class TariffMapper {
         tariff.setParameter(tariffDTO.getParameter());
         tariff.setTariffType(tariffDTO.getTariffType());
         tariff.setPrice(tariffDTO.getPrice());
+        if (tariffDTO.getConditions() != null) {
+            tariff.setTariffConditions(tariffDTO.getConditions().stream().map(TariffConditionMapper::toEntity).toList());
+        }
         return tariff;
     }
 }

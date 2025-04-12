@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,11 +17,10 @@ public class GeneralTariffDTO {
     private Long id;
     private String parameter;
     private double price;
-    private TariffType tariffType;  // Representa el tipo de tarifa como una cadena
-    private Long supplierId;    // Solo almacenamos el ID del proveedor para referencias simples
+    private TariffType tariffType;
+    private Long supplierId;
+    private List<TariffConditionRequest> conditions;
 
-    // Lista de condiciones de tarifa, representadas por sus DTOs
 
-    // Constructor u otro método para facilitar la conversión de la entidad a DTO
 
 }

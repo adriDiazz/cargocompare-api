@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,4 +18,6 @@ public class CreateTariffRequest {
     private TariffType tariffType;  // Representa el tipo de tarifa como una cadena
     private Long supplierId;
     private Long logisticCompanyId; // ID de la empresa logística asociada a la tarifa
+    private List<TariffConditionRequest> conditions;
+
 }

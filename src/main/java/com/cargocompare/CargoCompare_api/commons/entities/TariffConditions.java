@@ -2,12 +2,12 @@ package com.cargocompare.CargoCompare_api.commons.entities;
 
 import com.cargocompare.CargoCompare_api.tariffs.GeneralTariff;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Builder
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "condiciones_tarifa")
