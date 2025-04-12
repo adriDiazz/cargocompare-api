@@ -1,19 +1,17 @@
-# Etapa de construcción (builder)
-FROM eclipse-temurin:23-jdk AS builder
+FROM maven:3.9.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
-COPY . .
-RUN ./mvnw clean package -DskipTests
+COPY pom.xml ./
+COPY src ./src
 
-# Etapa de ejecución
-FROM eclipse-temurin:23-jre
+RUN mvn clean package -DskipTests
+
+FROM openjdk:21-jdk-slim
+
 WORKDIR /app
 
-# Copiamos el JAR construido desde la etapa anterior
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=build /app/target/CargoCompare-api-0.0.1-SNAPSHOT.jar /app/CargoCompare-api-0.0.1-SNAPSHOT.jar
 
-# Railway suele exponer el puerto automáticamente, pero es buena práctica indicarlo
 EXPOSE 8080
 
-# Comando para ejecutar la app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "/app/CargoCompare-api-0.0.1-SNAPSHOT.jar"]
