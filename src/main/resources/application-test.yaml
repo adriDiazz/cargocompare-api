@@ -2,10 +2,6 @@ server:
   port: ${PORT:8080}
 
 
-logging:
-  level:
-    root: DEBUG
-
 spring:
   jpa:
     hibernate:
@@ -15,7 +11,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
   datasource:
-    url: jdbc:mysql://mysql.railway.internal:3306/railway
+    url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
     username: ${MYSQLUSER}
     password: ${MYSQLPASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
