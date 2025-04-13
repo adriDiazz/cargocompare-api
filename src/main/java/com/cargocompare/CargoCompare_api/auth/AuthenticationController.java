@@ -68,22 +68,19 @@ public class AuthenticationController {
     ) {
         var auth = authenticationService.authenticate(authenticationRequest);
 
-        if(auth.getVerificationCode() == null) {
-            // Configurar cookies seguras
-            Cookie tokenCookie = new Cookie("token", auth.getAccessToken());
-            tokenCookie.setHttpOnly(true);
-//        tokenCookie.setSecure(true); // Solo HTTPS
-            tokenCookie.setPath("/");
-            tokenCookie.setMaxAge(24 * 60 * 60); // Token expira en 24 horas
+        if (auth.getVerificationCode() == null) {
+            // Agrega manualmente ambas cookies con SameSite=None y Secure
+            String tokenCookie = String.format(
+                    "token=%s; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=%d",
+                    auth.getAccessToken(), 24 * 60 * 60
+            );
+            String refreshCookie = String.format(
+                    "refreshToken=%s; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=%d",
+                    auth.getRefreshToken(), 7 * 24 * 60 * 60
+            );
 
-            Cookie refreshCookie = new Cookie("refreshToken", auth.getRefreshToken());
-            refreshCookie.setHttpOnly(true);
-//        refreshCookie.setSecure(true); // Solo HTTPS
-            refreshCookie.setPath("/");
-            refreshCookie.setMaxAge(7 * 24 * 60 * 60); // Refresh token expira en 7 días
-
-            response.addCookie(tokenCookie);
-            response.addCookie(refreshCookie);
+            response.addHeader("Set-Cookie", tokenCookie);
+            response.addHeader("Set-Cookie", refreshCookie);
         }
 
         return ResponseEntity.ok(
