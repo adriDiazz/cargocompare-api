@@ -61,6 +61,19 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.register(authenticationRequest));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        // Eliminar cookie del token
+        String deleteTokenCookie = "token=; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=0";
+        String deleteRefreshCookie = "refreshToken=; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=0";
+
+        response.addHeader("Set-Cookie", deleteTokenCookie);
+        response.addHeader("Set-Cookie", deleteRefreshCookie);
+
+        return ResponseEntity.ok("Logged out successfully");
+    }
+
+
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(
             @RequestBody @Valid AuthenticationRequest authenticationRequest,
@@ -94,23 +107,23 @@ public class AuthenticationController {
     @PostMapping("/verify-admin-code")
     public ResponseEntity<?> verifyCode(@RequestBody @Valid VerificationCodeRequest codeRequest, HttpServletResponse response) {
         boolean isValid = verificationService.verifyCode(codeRequest.getEmail(), codeRequest.getCode());
+
         if (isValid) {
             var auth = authenticationService.proceedWithFullAuthentication(codeRequest.getEmail());
-            // Configurar cookies seguras
-            Cookie tokenCookie = new Cookie("token", auth.getAccessToken());
-            tokenCookie.setHttpOnly(true);
-//        tokenCookie.setSecure(true); // Solo HTTPS
-            tokenCookie.setPath("/");
-            tokenCookie.setMaxAge(24 * 60 * 60); // Token expira en 24 horas
 
-            Cookie refreshCookie = new Cookie("refreshToken", auth.getRefreshToken());
-            refreshCookie.setHttpOnly(true);
-//        refreshCookie.setSecure(true); // Solo HTTPS
-            refreshCookie.setPath("/");
-            refreshCookie.setMaxAge(7 * 24 * 60 * 60); // Refresh token expira en 7 días
+            // Configurar cookies seguras usando headers directamente
+            String tokenCookie = String.format(
+                    "token=%s; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=%d",
+                    auth.getAccessToken(), 24 * 60 * 60
+            );
+            String refreshCookie = String.format(
+                    "refreshToken=%s; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=%d",
+                    auth.getRefreshToken(), 7 * 24 * 60 * 60
+            );
 
-            response.addCookie(tokenCookie);
-            response.addCookie(refreshCookie);
+            response.addHeader("Set-Cookie", tokenCookie);
+            response.addHeader("Set-Cookie", refreshCookie);
+
             return ResponseEntity.ok(
                     AuthenticationResponse.builder()
                             .accessToken(auth.getAccessToken())
@@ -121,4 +134,6 @@ public class AuthenticationController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired verification code");
         }
     }
+
+
 }
