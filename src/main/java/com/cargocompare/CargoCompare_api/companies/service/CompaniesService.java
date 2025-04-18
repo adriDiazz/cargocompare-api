@@ -12,4 +12,6 @@ public interface CompaniesService {
     LogisticCompany createCompany(CreateCompanyRequest companyRequest);
     List<CompanyDTO> getCompanies();
     CompanyExtraDetailsDTO getCompanyById(Long id);
+    void deleteCompany(Long id);
+    CompanyDTO updateCompany(Long id, CreateCompanyRequest companyRequest);
 }

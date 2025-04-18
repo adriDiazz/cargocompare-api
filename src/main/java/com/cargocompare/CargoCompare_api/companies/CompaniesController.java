@@ -42,4 +42,23 @@ public class CompaniesController {
     ) {
         return ResponseEntity.ok(companiesService.getCompanyById(companyId));
     }
+
+
+    @DeleteMapping("/{companyId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> deleteCompany(
+            @PathVariable Long companyId
+    ) {
+        companiesService.deleteCompany(companyId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/{companyId}")
+    public ResponseEntity<CompanyDTO> updateCompany(
+            @PathVariable Long companyId,
+            @RequestBody @Valid CreateCompanyRequest companyRequest
+    ) {
+        return ResponseEntity.ok(companiesService.updateCompany(companyId, companyRequest));
+    }
 }

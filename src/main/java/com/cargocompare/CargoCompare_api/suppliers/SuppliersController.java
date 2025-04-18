@@ -58,4 +58,20 @@ public class SuppliersController {
         return ResponseEntity.ok(supplierService.getSupplierByCompanyIdAndSupplierId(companyId, supplierId));
     }
 
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> deleteSupplier(@PathVariable Long id) {
+        supplierService.deleteSupplier(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<SupplierDTO> updateSupplier(
+            @PathVariable Long id,
+            @RequestBody @Valid CreateSupplierRequest supplierRequest
+    ) {
+        return ResponseEntity.ok(supplierService.updateSupplier(id, supplierRequest));
+    }
+
 }

@@ -26,7 +26,7 @@ public class SupplierCompany {
     @JoinColumn(name = "proveedor_id", nullable = false)
     private Supplier supplier;
 
-    @Column(name = "tarifa_id", nullable = false)
+    @Column(name = "tarifa_id", nullable = true)
     private Long tariffId;
 
 }

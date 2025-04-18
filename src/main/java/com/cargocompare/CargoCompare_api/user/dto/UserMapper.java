@@ -10,6 +10,7 @@ public class UserMapper {
         UserDTO userDTO = new UserDTO();
         userDTO.setLastName(user.getLastName());
         userDTO.setEmail(user.getEmail());
+        userDTO.setState(user.getState());
         userDTO.setName(user.getName());
         if (user.getLogisticCompany() != null) {
             userDTO.setLogisticCompany(CompanyMapper.toCompanyDTO(user.getLogisticCompany()));

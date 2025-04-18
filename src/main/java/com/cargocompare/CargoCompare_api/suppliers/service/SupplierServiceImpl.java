@@ -53,6 +53,7 @@ public class SupplierServiceImpl implements SupplierService {
         SupplierCompany relation = SupplierCompany.builder()
                 .logisticCompany(logisticCompany)
                 .supplier(supplier)
+                .tariffId((long) -1)
                 .build();
 
         supplierCompanyRepository.save(relation);
@@ -81,7 +82,39 @@ public class SupplierServiceImpl implements SupplierService {
                 .orElseThrow(() -> new SupplierNotFoundError("Proveedor no encontrado"));
     }
 
+    @Override
+    public void deleteSupplier(Long id) {
+        var supplier = suppliersRepository.findById(id)
+                .orElseThrow(() -> new SupplierNotFoundError("El proveedor con ID " + id + " no fue encontrado"));
 
+        suppliersRepository.delete(supplier);
+    }
+
+    @Override
+    public SupplierDTO updateSupplier(Long id, CreateSupplierRequest supplierRequest) {
+        return suppliersRepository.findById(id)
+                .map(supplier -> {
+                    supplier.setName(supplierRequest.getName());
+                    supplier.setAddress(supplierRequest.getAddress());
+                    supplier.setPhone(supplierRequest.getPhone());
+                    supplier.setEmail(supplierRequest.getEmail());
+                    supplier.setCif(supplierRequest.getCif());
+                    supplier.setCity(supplierRequest.getCity());
+                    supplier.setCountry(supplierRequest.getCountry());
+                    supplier.setDescription(supplierRequest.getDescription());
+                    supplier.setContactEmail(supplierRequest.getContactEmail());
+                    supplier.setContactPerson(supplierRequest.getContactPerson());
+                    supplier.setContactPhone(supplierRequest.getContactPhone());
+                    supplier.setLogo(supplierRequest.getLogo());
+                    supplier.setPostalCode(supplierRequest.getPostalCode());
+                    supplier.setProvince(supplierRequest.getProvince());
+                    supplier.setSocialReason(supplierRequest.getSocialReason());
+                    supplier.setWebSite(supplierRequest.getWebSite());
+                    return suppliersRepository.save(supplier);
+                })
+                .map(SupplierMapper::toSupplierDTO)
+                .orElseThrow(() -> new SupplierNotFoundError("Proveedor no encontrado"));
+    }
 
 
 }

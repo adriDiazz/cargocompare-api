@@ -66,5 +66,39 @@ public class CompaniesServiceImpl implements CompaniesService{
         );
     }
 
+    @Override
+    public void deleteCompany(Long id) {
+        var company = companiesRepository.findById(id)
+                .orElseThrow(() -> new CompanyNotFoundError("La compañía con ID " + id + " no fue encontrada"));
+
+        companiesRepository.delete(company);
+    }
+
+    @Override
+    public CompanyDTO updateCompany(Long id, CreateCompanyRequest companyRequest) {
+        return companiesRepository.findById(id)
+                .map(company -> {
+                    company.setName(companyRequest.getName());
+                    company.setAddress(companyRequest.getAddress());
+                    company.setPhone(companyRequest.getPhone());
+                    company.setEmail(companyRequest.getEmail());
+                    company.setCif(companyRequest.getCif());
+                    company.setCity(companyRequest.getCity());
+                    company.setCountry(companyRequest.getCountry());
+                    company.setDescription(companyRequest.getDescription());
+                    company.setContactEmail(companyRequest.getContactEmail());
+                    company.setContactPerson(companyRequest.getContactPerson());
+                    company.setContactPhone(companyRequest.getContactPhone());
+                    company.setLogo(companyRequest.getLogo());
+                    company.setPostalCode(companyRequest.getPostalCode());
+                    company.setProvince(companyRequest.getProvince());
+                    company.setSocialReason(companyRequest.getSocialReason());
+                    company.setWebSite(companyRequest.getWebSite());
+                    return companiesRepository.save(company);
+                })
+                .map(CompanyMapper::toCompanyDTO)
+                .orElseThrow(() -> new CompanyNotFoundError("La compañía con ID " + id + " no fue encontrada"));
+    }
+
 
 }

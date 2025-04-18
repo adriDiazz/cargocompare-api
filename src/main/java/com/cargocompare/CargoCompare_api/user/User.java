@@ -41,6 +41,9 @@ public class User implements UserDetails {
     private String secret;
 
     @Enumerated(EnumType.STRING)
+    private State state;
+
+    @Enumerated(EnumType.STRING)
     Role role;
 
 

@@ -4,6 +4,7 @@ import com.cargocompare.CargoCompare_api.companies.LogisticCompany;
 import com.cargocompare.CargoCompare_api.companies.dto.CompanyDTO;
 import com.cargocompare.CargoCompare_api.suppliers.Supplier;
 import com.cargocompare.CargoCompare_api.suppliers.dto.SupplierDTO;
+import com.cargocompare.CargoCompare_api.user.State;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,6 +22,7 @@ public class UserDTO {
     private String name;
     private String lastName;
     private String email;
+    private State state;
 
     private boolean isVerified;
     Collection<SimpleGrantedAuthority> authorities;
