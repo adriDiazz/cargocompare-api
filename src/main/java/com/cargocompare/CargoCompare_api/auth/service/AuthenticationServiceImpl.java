@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -35,6 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 
     @Override
+    @Transactional
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -66,7 +68,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     }
 
-    private AuthenticationResponse proceedWithNormalAuthentication(User user) {
+    @Transactional
+    protected AuthenticationResponse proceedWithNormalAuthentication(User user) {
         var userDTO = UserDTO.builder()
                 .name(user.getName())
                 .lastName(user.getLastName())

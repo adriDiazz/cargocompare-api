@@ -24,7 +24,7 @@ public class CorsConfig {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of("http://localhost:4200", "https://cargo-compare-client-fkno.vercel.app"));
+        config.setAllowedOrigins(List.of("http://localhost:4200", "https://cargo-compare-client-fkno.vercel.app", "http://localhost:5173", "http://localhost:5174"));
         config.setAllowedHeaders(Arrays.asList(
                 ORIGIN,
                 CONTENT_TYPE,

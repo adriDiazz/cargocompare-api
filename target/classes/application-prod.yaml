@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    url: ${mysql-url-prod}
+    username: ${mysql-username-prod}
+    password: ${mysql-password-prod}
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${mail-username-prod}
+    password: ${mail-appPassword-prod}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+application:
+  security:
+    jwt:
+      secret-key: ${jwt-secret-prod}
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
